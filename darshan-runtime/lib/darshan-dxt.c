@@ -409,7 +409,7 @@ void dxt_posix_stat(darshan_record_id rec_id, double start_time,
     micro_s = tspec_end.tv_nsec/1.0e3;
     printf("micro_s: %zu\n", micro_s);
     printf("tspec_end.tv_sec: %zu\n", tspec_end.tv_sec);
-    sprintf(jb11,"{\"id\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"stamp\":%ld.%lf \"type\": %s}", rec_id, tspec_start, tspec_end, (long)tspec_end.tv_sec, micro_s, "stat");
+    sprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"type\": %s}", rec_id, start_time, end_time, tspec_start, tspec_end, "stat");
     write_data_to_file("/mnt/IOLustre/test.txt", jb11);
     
     //printf("dxt_posix_runtime: %p\n", dxt_posix_runtime);
