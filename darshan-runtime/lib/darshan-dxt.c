@@ -420,6 +420,10 @@ void dxt_posix_stat(darshan_record_id rec_id, double start_time,
         }
     }
 
+    tspec_start = darshan_core_abs_timespec_from_wtime(start_time);
+    tspec_end = darshan_core_abs_timespec_from_wtime(end_time);
+    micro_s = tspec_end.tv_nsec/1.0e3;
+
     file_rec = rec_ref->file_rec;
     check_stat_trace_buf(rec_ref, DXT_POSIX_MOD, dxt_posix_runtime);
     //printf("file_rec->stat_count: %d\n", file_rec->stat_count);
@@ -435,7 +439,7 @@ void dxt_posix_stat(darshan_record_id rec_id, double start_time,
     rec_ref->stat_traces[file_rec->stat_count].start_time = start_time;
     rec_ref->stat_traces[file_rec->stat_count].end_time = end_time;
     file_rec->stat_count += 1;
-    sprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld}", rec_id, start_time, end_time);
+    sprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"total\":%0.6f \"stamp\":%lu.%.6lu \"type\": %s}", rec_id, start_time, end_time, tspec_start, tspec_end, "stat");
     write_data_to_file("/mnt/IOLustre/test.txt", jb11);
     //printf("file_rec->stat_count: %d\n", file_rec->stat_count);
 
