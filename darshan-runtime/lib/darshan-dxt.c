@@ -439,7 +439,7 @@ void dxt_posix_stat(darshan_record_id rec_id, double start_time,
     rec_ref->stat_traces[file_rec->stat_count].start_time = start_time;
     rec_ref->stat_traces[file_rec->stat_count].end_time = end_time;
     file_rec->stat_count += 1;
-    sprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"type\": %s}", rec_id, start_time, end_time, tspec_start, tspec_end, "stat");
+    sprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"total\":%0.6f \"type\": %s}", rec_id, start_time, end_time, tspec_start, tspec_end, tspec_end.tv_nsec, "stat");
     write_data_to_file("/mnt/IOLustre/test.txt", jb11);
     //printf("file_rec->stat_count: %d\n", file_rec->stat_count);
 
