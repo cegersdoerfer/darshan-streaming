@@ -407,7 +407,8 @@ void dxt_posix_stat(darshan_record_id rec_id, double start_time,
     tspec_start = darshan_core_abs_timespec_from_wtime(start_time);
     tspec_end = darshan_core_abs_timespec_from_wtime(end_time);
     micro_s = tspec_end.tv_nsec/1.0e3;
-    
+    printf("micro_s: %zu\n", micro_s);
+    printf("tspec_end.tv_sec: %zu\n", tspec_end.tv_sec);
     sprintf(jb11,"{\"id\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"stamp\":%zu.%zu \"type\": %s}", rec_id, tspec_start, tspec_end, sizeof(tspec_end.tv_sec), sizeof(micro_s), "stat");
     write_data_to_file("/mnt/IOLustre/test.txt", jb11);
     
