@@ -244,7 +244,9 @@ static int darshan_mem_alignment = 1;
         break; \
     } \
     /* DXT to record detailed read tracing information */ \
+    printf("recording open");\
     dxt_posix_open(__rec_ref->file_rec->base_rec.id, __tm1, __tm2); \
+    printf("recorded open");\
     _POSIX_RECORD_OPEN(__ret, __rec_ref, __mode, __tm1, __tm2, 1, -1); \
     darshan_instrument_fs_data(__rec_ref->fs_type, __newpath, __ret); \
     if(__newpath != __path) free(__newpath); \
@@ -288,7 +290,9 @@ static int darshan_mem_alignment = 1;
     else \
         this_offset = rec_ref->offset; \
     /* DXT to record detailed read tracing information */ \
+    printf("recording read");\
     dxt_posix_read(rec_ref->file_rec->base_rec.id, this_offset, __ret, __tm1, __tm2); \
+    printf("recorded read");\
     /* heatmap to record traffic summary */ \
     heatmap_update(posix_runtime->heatmap_id, HEATMAP_READ, __ret, __tm1, __tm2); \
     if(this_offset > rec_ref->last_byte_read) \
@@ -353,7 +357,9 @@ static int darshan_mem_alignment = 1;
     else \
         this_offset = rec_ref->offset; \
     /* DXT to record detailed write tracing information */ \
+    printf("recording write");\
     dxt_posix_write(rec_ref->file_rec->base_rec.id, this_offset, __ret, __tm1, __tm2); \
+    printf("recorded write");\
     /* heatmap to record traffic summary */ \
     heatmap_update(posix_runtime->heatmap_id, HEATMAP_WRITE, __ret, __tm1, __tm2); \
     if(this_offset > rec_ref->last_byte_written) \
@@ -411,10 +417,10 @@ static int darshan_mem_alignment = 1;
     rec_id = darshan_core_gen_record_id(newpath); \
     rec_ref = darshan_lookup_record_ref(posix_runtime->rec_id_hash, &rec_id, sizeof(darshan_record_id)); \
     if(!rec_ref) rec_ref = posix_track_new_file_record(rec_id, newpath); \
-    if(newpath != __path) free(newpath); \
     printf("recording stat");\
     dxt_posix_stat(rec_ref->file_rec->base_rec.id, __tm1, __tm2); \
     printf("recorded stat");\
+    if(newpath != __path) free(newpath); \
     if(rec_ref) { \
         POSIX_RECORD_STAT(rec_ref, __statbuf, __tm1, __tm2); \
     } \
