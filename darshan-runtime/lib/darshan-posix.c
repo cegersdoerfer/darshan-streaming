@@ -412,7 +412,9 @@ static int darshan_mem_alignment = 1;
     rec_ref = darshan_lookup_record_ref(posix_runtime->rec_id_hash, &rec_id, sizeof(darshan_record_id)); \
     if(!rec_ref) rec_ref = posix_track_new_file_record(rec_id, newpath); \
     if(newpath != __path) free(newpath); \
+    printf("recording stat");\
     dxt_posix_stat(rec_ref->file_rec->base_rec.id, __tm1, __tm2); \
+    printf("recorded stat");\
     if(rec_ref) { \
         POSIX_RECORD_STAT(rec_ref, __statbuf, __tm1, __tm2); \
     } \
