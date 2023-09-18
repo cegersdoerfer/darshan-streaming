@@ -299,7 +299,7 @@ void dxt_posix_write(darshan_record_id rec_id, int64_t offset,
     tspec_start = darshan_core_abs_timespec_from_wtime(start_time);
     tspec_end = darshan_core_abs_timespec_from_wtime(end_time);
     micro_s = tspec_end.tv_nsec/1.0e3;
-    sprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"length\":%"PRId64" \"offset\":%"PRId64" \"type\": %s}", rec_id, start_time, end_time, tspec_start, tspec_end, *length, *offset, "write");
+    snprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"length\":%"PRId64" \"offset\":%"PRId64" \"type\": %s}", rec_id, start_time, end_time, tspec_start, tspec_end, length, offset, "write");
     write_data_to_file("/mnt/IOLustre/test.txt", jb11);
 
     DXT_UNLOCK();
@@ -353,7 +353,7 @@ void dxt_posix_read(darshan_record_id rec_id, int64_t offset,
     tspec_start = darshan_core_abs_timespec_from_wtime(start_time);
     tspec_end = darshan_core_abs_timespec_from_wtime(end_time);
     micro_s = tspec_end.tv_nsec/1.0e3;
-    sprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"length\":%"PRId64" \"offset\":%"PRId64" \"type\": %s}", rec_id, start_time, end_time, tspec_start, tspec_end, *length, *offset, "read");
+    snprintf(jb11,"{\"id\":%ld \"start\":%ld \"end\":%ld \"tspec_start\":%0.6f \"tspec_end\":%0.6f \"length\":%"PRId64" \"offset\":%"PRId64" \"type\": %s}", rec_id, start_time, end_time, tspec_start, tspec_end, length, offset, "read");
     write_data_to_file("/mnt/IOLustre/test.txt", jb11);
 
     DXT_UNLOCK();
